@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gesner Deslandes Lifelong Learning University — Year 1 Codex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-desk: #1c1917;
+      --bg-sidebar: #26221f;
+      --bg-paper: #fbf8f1;
+      --bg-paper-alt: #f3ede0;
+      --ink-primary: #1f1b18;
+      --ink-secondary: #575049;
+      --ink-muted: #857c72;
+      --ink-on-dark: #f5f2eb;
+      --ink-on-dark-muted: #b5aca2;
+      --accent: #9a3412;
+      --accent-soft: #ffedd5;
+      --success: #166534;
+      --success-soft: #dcfce7;
+      --border-light: #e4dccb;
+      --border-dark: #3b3530;
+      --shadow-book: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #2c2623 0%, var(--bg-desk) 75%);
+      color: var(--ink-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Top University Header */
+    .topbar {
+      background: rgba(24, 21, 19, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-dark);
+      color: var(--ink-on-dark);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .crest {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #c2410c, #7c2d12);
+      display: grid;
+      place-items: center;
+      font-family: "Newsreader", Georgia, serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #fff7ed;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--ink-on-dark-muted);
+    }
+
+    .topbar-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .overall-progress {
+      background: var(--bg-sidebar);
+      border: 1px solid var(--border-dark);
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: var(--ink-on-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-radius: 8px;
+      padding: 0.5rem 0.9rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #7c2d12;
+    }
+
+    .btn-secondary {
+      background: var(--bg-paper-alt);
+      color: var(--ink-primary);
+      border-color: var(--border-light);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #e9e0ce;
+    }
+
+    .btn-ghost-dark {
+      background: transparent;
+      color: var(--ink-on-dark);
+      border-color: var(--border-dark);
+    }
+
+    .btn-ghost-dark:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-lang {
+      background: #fff7ed;
+      color: var(--accent);
+      border-color: #fed7aa;
+      font-weight: 600;
+    }
+
+    .btn-lang:hover:not(:disabled) {
+      background: #ffedd5;
+    }
+
+    /* Main Workspace Layout */
+    .workspace {
+      max-width: 1440px;
+      margin: 1.5rem auto;
+      padding: 0 1.25rem 2.5rem;
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* Sidebar: 100-Lesson Index */
+    .codex-index {
+      background: var(--bg-sidebar);
+      color: var(--ink-on-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 16px;
+      padding: 1.1rem;
+      position: sticky;
+      top: 78px;
+      max-height: calc(100vh - 98px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .index-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .index-header h2 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-on-dark-muted);
+    }
+
+    .search-input,
+    .track-select {
+      width: 100%;
+      background: #1a1715;
+      color: var(--ink-on-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.85rem;
+      font-family: inherit;
+    }
+
+    .search-input:focus,
+    .track-select:focus {
+      outline: 2px solid #c2410c;
+      outline-offset: 1px;
+    }
+
+    .lesson-list {
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding-right: 0.25rem;
+    }
+
+    .lesson-item {
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 0.6rem 0.7rem;
+      color: var(--ink-on-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.15s ease;
+    }
+
+    .lesson-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .lesson-item.active {
+      background: rgba(194, 65, 12, 0.22);
+      border-color: rgba(234, 88, 12, 0.55);
+    }
+
+    .lesson-item-num {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fb923c;
+      display: block;
+    }
+
+    .lesson-item-title {
+      font-size: 0.84rem;
+      line-height: 1.3;
+      display: block;
+    }
+
+    .pass-dots {
+      display: flex;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+
+    .pass-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #44403c;
+    }
+
+    .pass-dot.done {
+      background: #4ade80;
+    }
+
+    /* Book Spread Container */
+    .book-shell {
+      background: var(--bg-paper);
+      border-radius: 18px;
+      box-shadow: var(--shadow-book);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    .book-spine-banner {
+      background: var(--bg-paper-alt);
+      border-bottom: 1px solid var(--border-light);
+      padding: 0.85rem 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+    }
+
+    .track-badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.76rem;
+    }
+
+    .book-pages {
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      min-height: 640px;
+    }
+
+    .left-page {
+      padding: 2rem 2.25rem;
+      border-right: 1px solid var(--border-light);
+    }
+
+    .right-page {
+      padding: 1.75rem;
+      background: #f8f3e8;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .lesson-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .lesson-heading {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+      line-height: 1.2;
+      color: var(--ink-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .lesson-objective {
+      font-style: italic;
+      color: var(--ink-secondary);
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.05rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    /* Three-Pass Loop Switcher */
+    .pass-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .pass-tab {
+      background: var(--bg-paper-alt);
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .pass-tab.active {
+      background: var(--ink-primary);
+      color: #fff;
+      border-color: var(--ink-primary);
+    }
+
+    .pass-tab-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .pass-tab-sub {
+      font-size: 0.76rem;
+      opacity: 0.82;
+      margin-top: 0.15rem;
+    }
+
+    /* AI Professor Audio Bar */
+    .audio-panel {
+      background: var(--bg-paper-alt);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .audio-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+
+    .audio-status {
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+      font-weight: 500;
+    }
+
+    .speed-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+    }
+
+    .speed-btn {
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-light);
+      background: #fff;
+      color: var(--ink-primary);
+      font-size: 0.76rem;
+      cursor: pointer;
+    }
+
+    .speed-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* Reading Body */
+    .reading-prose {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.14rem;
+      line-height: 1.78;
+      color: var(--ink-primary);
+    }
+
+    .reading-prose p {
+      margin-bottom: 1.05rem;
+      padding: 0.35rem 0.5rem;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .reading-prose p.speaking {
+      background: #fef3c7;
+    }
+
+    .reading-count-note {
+      margin-top: 1rem;
+      padding: 0.75rem 0.95rem;
+      border-radius: 10px;
+      background: var(--success-soft);
+      color: var(--success);
+      font-size: 0.84rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* Right Page Cards: InVideo & Active Recall */
+    .side-card {
+      background: #fff;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 1.1rem;
+    }
+
+    .side-card h3 {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-secondary);
+      margin-bottom: 0.65rem;
+    }
+
+    .video-box {
+      border-radius: 10px;
+      overflow: hidden;
+      background: #181513;
+      color: #f5f2eb;
+      border: 1px solid #2e2926;
+    }
+
+    .video-placeholder {
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .video-placeholder p {
+      font-size: 0.84rem;
+      color: #d6cfc7;
+      margin: 0.5rem 0 0.85rem;
+    }
+
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      display: block;
+    }
+
+    .takeaways-list {
+      padding-left: 1.15rem;
+      font-size: 0.9rem;
+      color: var(--ink-primary);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .reflection-area {
+      width: 100%;
+      min-height: 82px;
+      margin-top: 0.5rem;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 0.6rem;
+      font-family: inherit;
+      font-size: 0.85rem;
+      resize: vertical;
+      background: var(--bg-paper);
+    }
+
+    .book-footer {
+      background: var(--bg-paper-alt);
+      border-top: 1px solid var(--border-light);
+      padding: 1rem 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    @media (max-width: 980px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+      .codex-index {
+        position: static;
+        max-height: 290px;
+      }
+      .book-pages {
+        grid-template-columns: 1fr;
+      }
+      .left-page {
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+        padding: 1.4rem;
+      }
+      .right-page {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="crest" aria-hidden="true">GD</div>
+      <div>
+        <div class="brand-title" id="brandTitle">Gesner Deslandes Lifelong Learning University</div>
+        <div class="brand-sub" id="brandSub">Year 1 Book Codex • 100 Modern AI-Era Lessons • Read 2–3× + Listen</div>
+      </div>
+    </div>
+    <div class="topbar-controls">
+      <button class="btn btn-lang" id="langToggleBtn" type="button" title="Tap to translate between English and French">
+        🌐 EN → FR
+      </button>
+      <div class="overall-progress" id="overallProgress">0 / 100 Lessons Completed</div>
+      <button class="btn btn-ghost-dark" id="resetProgressBtn" type="button">Reset Progress</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <!-- Left Column: 100-Lesson Index -->
+    <aside class="codex-index" aria-label="100 Lessons Index">
+      <div class="index-header">
+        <h2 id="syllabusHeading">Year 1 Syllabus</h2>
+        <span id="filteredCount" style="font-size:0.78rem;color:var(--ink-on-dark-muted);">100 lessons</span>
+      </div>
+      <select class="track-select" id="trackFilter" aria-label="Filter by curriculum track"></select>
+      <input
+        type="search"
+        class="search-input"
+        id="lessonSearch"
+        placeholder="Search lesson number or topic..."
+        aria-label="Search lessons"
+      />
+      <div class="lesson-list" id="lessonList"></div>
+    </aside>
+
+    <!-- Right Column: Book Spread -->
+    <section class="book-shell" aria-label="Lesson Book Spread">
+      <div class="book-spine-banner">
+        <div>
+          <span class="track-badge" id="currentTrackBadge">Track 1</span>
+          <span id="currentPageLabel" style="margin-left:0.5rem;font-weight:600;">Page 1 of 100</span>
+        </div>
+        <div id="passSummaryText">Passes completed: 0 / 3</div>
+      </div>
+
+      <div class="book-pages">
+        <!-- Main Reading & Audio Page -->
+        <article class="left-page">
+          <div class="lesson-kicker" id="lessonKicker">LESSON 01</div>
+          <h1 class="lesson-heading" id="lessonTitle">Loading...</h1>
+          <p class="lesson-objective" id="lessonObjective"></p>
+
+          <!-- Three-Pass Loop -->
+          <div class="pass-tabs" role="tablist" aria-label="Three-Pass Study Loop">
+            <button class="pass-tab active" data-pass="1" type="button">
+              <div class="pass-tab-top"><span id="pass1Label">Pass 1</span><span id="checkPass1">○</span></div>
+              <div class="pass-tab-sub" id="pass1Sub">Visual & Overview</div>
+            </button>
+            <button class="pass-tab" data-pass="2" type="button">
+              <div class="pass-tab-top"><span id="pass2Label">Pass 2</span><span id="checkPass2">○</span></div>
+              <div class="pass-tab-sub" id="pass2Sub">Read + AI Audio</div>
+            </button>
+            <button class="pass-tab" data-pass="3" type="button">
+              <div class="pass-tab-top"><span id="pass3Label">Pass 3</span><span id="checkPass3">○</span></div>
+              <div class="pass-tab-sub" id="pass3Sub">Deep Recall & Notes</div>
+            </button>
+          </div>
+
+          <!-- AI Professor Audio Controls -->
+          <div class="audio-panel">
+            <div class="audio-row">
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                <button class="btn btn-primary" id="playAudioBtn" type="button">▶ Listen to AI Professor</button>
+                <button class="btn btn-secondary" id="stopAudioBtn" type="button">■ Stop</button>
+              </div>
+              <div class="speed-group">
+                <span id="speedLabel">Speed:</span>
+                <button class="speed-btn" data-rate="0.85" type="button">0.85×</button>
+                <button class="speed-btn active" data-rate="1.0" type="button">1.0×</button>
+                <button class="speed-btn" data-rate="1.25" type="button">1.25×</button>
+              </div>
+            </div>
+            <div class="audio-status" id="audioStatus">
+              AI Professor ready — read the text 2–3 times while listening to lock in comprehension.
+            </div>
+            <audio id="customAudioPlayer" controls style="display:none;width:100%;"></audio>
+          </div>
+
+          <!-- Lesson Paragraphs -->
+          <div class="reading-prose" id="readingProse"></div>
+
+          <!-- Read-Count & Pass Completion Bar -->
+          <div class="reading-count-note">
+            <span id="readCountText">Reads recorded for this lesson: 0</span>
+            <div style="display:flex;gap:0.45rem;flex-wrap:wrap;">
+              <button class="btn btn-secondary" id="logReadBtn" type="button">+ Log a Read</button>
+              <button class="btn btn-primary" id="completePassBtn" type="button">Mark Current Pass Done</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Margin Page: InVideo Visual + Takeaways + Reflection -->
+        <aside class="right-page">
+          <div class="side-card">
+            <h3 id="invideoHeading">InVideo Visual Scene</h3>
+            <div class="video-box" id="invideoContainer"></div>
+          </div>
+
+          <div class="side-card">
+            <h3 id="takeawaysHeading">Key Takeaways</h3>
+            <ul class="takeaways-list" id="takeawaysList"></ul>
+          </div>
+
+          <div class="side-card">
+            <h3 id="reflectionHeading">Pass 3 — Learner Reflection</h3>
+            <label for="reflectionInput" id="reflectionPrompt" style="font-size:0.82rem;color:var(--ink-secondary);">
+              Explain this lesson in your own words (as if teaching a friend):
+            </label>
+            <textarea
+              id="reflectionInput"
+              class="reflection-area"
+              placeholder="Write 2–3 sentences summarizing the core idea..."
+            ></textarea>
+            <div style="margin-top:0.55rem;display:flex;justify-content:space-between;align-items:center;">
+              <span id="savedNoteBadge" style="font-size:0.76rem;color:var(--ink-muted);">Saved locally</span>
+              <button class="btn btn-secondary" id="saveNoteBtn" type="button">Save Reflection</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="book-footer">
+        <button class="btn btn-secondary" id="prevLessonBtn" type="button">← Previous Page</button>
+        <span id="footerTip" style="font-size:0.82rem;color:var(--ink-secondary);">
+          Tip: Complete Pass 1, Pass 2, and Pass 3 to master the lesson.
+        </span>
+        <button class="btn btn-primary" id="nextLessonBtn" type="button">Next Page →</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const UI_STRINGS = {
+      en: {
+        langBtn: "🌐 EN → FR",
+        brandTitle: "Gesner Deslandes Lifelong Learning University",
+        brandSub: "Year 1 Book Codex • 100 Modern AI-Era Lessons • Read 2–3× + Listen",
+        overallProgress: (done) => `${done} / 100 Lessons Completed`,
+        resetBtn: "Reset Progress",
+        resetConfirm: "Reset all reading passes, read counts, and notes for Year 1?",
+        syllabusHeading: "Year 1 Syllabus",
+        shownCount: (n) => `${n} shown`,
+        allTracks: "All 5 Tracks (Lessons 1–100)",
+        searchPlaceholder: "Search lesson number or topic...",
+        pageLabel: (n) => `Page ${n} of 100`,
+        passesCompleted: (n) => `Passes completed: ${n} / 3`,
+        lessonKicker: (n) => `LESSON ${String(n).padStart(2, "0")}`,
+        pass1: "Pass 1",
+        pass1Sub: "Visual & Overview",
+        pass2: "Pass 2",
+        pass2Sub: "Read + AI Audio",
+        pass3: "Pass 3",
+        pass3Sub: "Deep Recall & Notes",
+        playAudio: "▶ Listen to AI Professor",
+        stopAudio: "■ Stop",
+        speedLabel: "Speed:",
+        audioReadyCustom: "Custom AI Professor audio track loaded for this lesson.",
+        audioReadySpeech: (rate) => `AI Professor voice ready at ${rate}× speed. Click Listen to read along.`,
+        audioStopped: "Narration stopped.",
+        speechUnavailable: "Browser speech synthesis is unavailable here; read the text aloud or attach an audio file.",
+        speechFinished: "AI Professor finished narration. Consider another pass or mark Pass 2 complete!",
+        speechSpeaking: (i, total, rate) => `AI Professor speaking paragraph ${i} of ${total} (${rate}×)...`,
+        readsRecorded: (r) => `Reads recorded for this lesson: ${r} (Aim for 2–3 reads)`,
+        logReadBtn: "+ Log a Read",
+        completePassBtn: "Mark Current Pass Done",
+        invideoHeading: "InVideo Visual Scene",
+        invideoSlotReady: "InVideo Slot Ready",
+        invideoHelp: "Add this lesson's InVideo embed URL in STARTER_LESSONS to display video here.",
+        takeawaysHeading: "Key Takeaways",
+        reflectionHeading: "Pass 3 — Learner Reflection",
+        reflectionPrompt: "Explain this lesson in your own words (as if teaching a friend):",
+        reflectionPlaceholder: "Write 2–3 sentences summarizing the core idea...",
+        savedBadge: "Saved in browser",
+        notSavedBadge: "Not saved yet",
+        saveNoteBtn: "Save Reflection",
+        prevBtn: "← Previous Page",
+        nextBtn: "Next Page →",
+        footerTip: "Tip: Complete Pass 1, Pass 2, and Pass 3 to master the lesson."
+      },
+      fr: {
+        langBtn: "🌐 FR → EN",
+        brandTitle: "Université d'Apprentissage Continu Gesner Deslandes",
+        brandSub: "Codex de 1re Année • 100 Leçons Modernes à l'Ère de l'IA • Lire 2–3× + Écouter",
+        overallProgress: (done) => `${done} / 100 Leçons Terminées`,
+        resetBtn: "Réinitialiser",
+        resetConfirm: "Réinitialiser tous les passages de lecture, lectures et notes de la 1re année ?",
+        syllabusHeading: "Programme 1re Année",
+        shownCount: (n) => `${n} affichées`,
+        allTracks: "Les 5 Parcours (Leçons 1–100)",
+        searchPlaceholder: "Rechercher un numéro ou un thème...",
+        pageLabel: (n) => `Page ${n} sur 100`,
+        passesCompleted: (n) => `Passages terminés : ${n} / 3`,
+        lessonKicker: (n) => `LEÇON ${String(n).padStart(2, "0")}`,
+        pass1: "Passe 1",
+        pass1Sub: "Visuel et Aperçu",
+        pass2: "Passe 2",
+        pass2Sub: "Lecture + Audio IA",
+        pass3: "Passe 3",
+        pass3Sub: "Rappel et Notes",
+        playAudio: "▶ Écouter le Professeur IA",
+        stopAudio: "■ Arrêter",
+        speedLabel: "Vitesse :",
+        audioReadyCustom: "Piste audio personnalisée du Professeur IA chargée pour cette leçon.",
+        audioReadySpeech: (rate) => `Voix du Professeur IA prête à ${rate}×. Cliquez sur Écouter pour suivre la lecture.`,
+        audioStopped: "Narration arrêtée.",
+        speechUnavailable: "La synthèse vocale du navigateur n'est pas disponible ici ; lisez à voix haute ou ajoutez un fichier audio.",
+        speechFinished: "Le Professeur IA a terminé la narration. Faites un autre passage ou validez la Passe 2 !",
+        speechSpeaking: (i, total, rate) => `Le Professeur IA lit le paragraphe ${i} sur ${total} (${rate}×)...`,
+        readsRecorded: (r) => `Lectures enregistrées pour cette leçon : ${r} (Visez 2–3 lectures)`,
+        logReadBtn: "+ Noter une Lecture",
+        completePassBtn: "Valider la Passe Active",
+        invideoHeading: "Scène Visuelle InVideo",
+        invideoSlotReady: "Emplacement InVideo Prêt",
+        invideoHelp: "Ajoutez l'URL d'intégration InVideo de cette leçon dans STARTER_LESSONS pour afficher la vidéo.",
+        takeawaysHeading: "Points Clés à Retenir",
+        reflectionHeading: "Passe 3 — Réflexion de l'Apprenant",
+        reflectionPrompt: "Expliquez cette leçon avec vos propres mots (comme si vous l'enseigniez à un ami) :",
+        reflectionPlaceholder: "Écrivez 2–3 phrases résumant l'idée principale...",
+        savedBadge: "Enregistré dans le navigateur",
+        notSavedBadge: "Pas encore enregistré",
+        saveNoteBtn: "Enregistrer la Réflexion",
+        prevBtn: "← Page Précédente",
+        nextBtn: "Page Suivante →",
+        footerTip: "Astuce : Terminez la Passe 1, la Passe 2 et la Passe 3 pour maîtriser la leçon."
+      }
+    };
+
+    const TRACKS = {
+      1: {
+        en: "Track 1: Foundations of Clear Thinking & Reading",
+        fr: "Parcours 1 : Fondamentaux de la Pensée Claire et de la Lecture"
+      },
+      2: {
+        en: "Track 2: AI Literacy & Modern Systems",
+        fr: "Parcours 2 : Culture IA et Systèmes Modernes"
+      },
+      3: {
+        en: "Track 3: Applied Workflows, Coding & Automation",
+        fr: "Parcours 3 : Flux de Travail, Code et Automatisation"
+      },
+      4: {
+        en: "Track 4: AI Agents, Research & Decisions",
+        fr: "Parcours 4 : Agents IA, Recherche et Décisions"
+      },
+      5: {
+        en: "Track 5: Creation, Communication & Craft",
+        fr: "Parcours 5 : Création, Communication et Savoir-Faire"
+      }
+    };
+
+    const STARTER_LESSONS = {
+      1: {
+        en: {
+          title: "The Three-Pass Method for Deep Comprehension",
+          objective: "Learn why reading once is rarely enough—and how structured re-reading plus audio builds durable memory.",
+          paragraphs: [
+            "Most learners treat reading as a single sprint from top to bottom. When a topic is new or technical, a single pass skims over subtle distinctions and leaves your brain with an illusion of familiarity rather than real understanding.",
+            "In Gesner Deslandes Lifelong Learning University, every lesson is built for two to three deliberate passes. On your first pass, you orient yourself with the visual overview and core question. On your second pass, you read carefully alongside the AI Professor voice to connect vocabulary, structure, and meaning.",
+            "On your third pass, you slow down to test what actually stuck. By combining eyes, ears, and active recall in your own words, you turn fleeting information into a mental model you can apply when AI tools or real-world problems put pressure on you."
+          ],
+          takeaways: [
+            "One pass often creates familiarity without deep retention.",
+            "Listening while reading reinforces rhythm, emphasis, and structure.",
+            "A third pass focused on recall turns reading into long-term skill."
+          ],
+          invideoPrompt: "60-second animated book spread showing a student doing Pass 1 visual overview, Pass 2 audio narration, and Pass 3 active recall."
+        },
+        fr: {
+          title: "La Méthode des Trois Passages pour une Compréhension Profonde",
+          objective: "Comprenez pourquoi lire une seule fois suffit rarement—et comment la relecture structurée avec l'audio crée une mémoire durable.",
+          paragraphs: [
+            "La plupart des apprenants traitent la lecture comme un sprint unique du début à la fin. Lorsqu'un sujet est nouveau ou technique, un seul passage survole des nuances importantes et laisse une illusion de familiarité plutôt qu'une vraie compréhension.",
+            "À l'Université d'Apprentissage Continu Gesner Deslandes, chaque leçon est conçue pour deux à trois passages délibérés. Lors de la première passe, vous vous repérez grâce à l'aperçu visuel et à la question centrale. Lors de la deuxième passe, vous lisez attentivement avec la voix du Professeur IA pour relier vocabulaire, structure et sens.",
+            "Lors de la troisième passe, vous ralentissez pour vérifier ce qui est vraiment retenu. En combinant les yeux, l'oreille et le rappel actif avec vos propres mots, vous transformez une information passagère en un modèle mental solide."
+          ],
+          takeaways: [
+            "Une seule lecture crée souvent une familiarité sans mémorisation profonde.",
+            "Écouter tout en lisant renforce le rythme, l'emphase et la structure.",
+            "Une troisième passe centrée sur le rappel transforme la lecture en compétence durable."
+          ],
+          invideoPrompt: "Livre animé de 60 secondes montrant un étudiant sur la Passe 1 visuelle, la Passe 2 audio IA et la Passe 3 de rappel actif."
+        },
+        invideoEmbedUrl: "",
+        audioUrl: ""
+      },
+      2: {
+        en: {
+          title: "First-Principles Thinking in an AI World",
+          objective: "Break complex problems down to fundamental truths instead of copying surface-level answers.",
+          paragraphs: [
+            "Reasoning by analogy means copying what others already do or what an AI generates on its first try. That works for routine tasks, but it breaks down when constraints change or when an answer sounds plausible yet misses the real bottleneck.",
+            "First-principles thinking asks: what are the most basic, indisputable facts of this situation, and what are we building from scratch? Once you separate real constraints from habits, you can use AI to explore options faster without surrendering judgment.",
+            "Read this paragraph a second time and ask yourself where you usually accept default assumptions. Strong learners in the AI era are not those who memorize trivia—they are those who frame sharper questions."
+          ],
+          takeaways: [
+            "Separate hard constraints from inherited habits or defaults.",
+            "Use AI to generate options, but keep human judgment on fundamentals.",
+            "Sharp problem framing beats generic prompting every time."
+          ],
+          invideoPrompt: "Minimalist visual metaphor comparing a pre-built template to building blocks from foundational principles."
+        },
+        fr: {
+          title: "Penser par Premiers Principes dans un Monde d'IA",
+          objective: "Décomposez les problèmes complexes jusqu'aux vérités fondamentales au lieu de copier des réponses superficielles.",
+          paragraphs: [
+            "Raisonner par analogie consiste à reproduire ce que d'autres font déjà ou ce qu'une IA génère dès le premier essai. Cela suffit pour des tâches de routine, mais échoue lorsque les contraintes changent ou qu'une réponse paraît plausible tout en manquant le vrai goulot d'étranglement.",
+            "La pensée par premiers principes demande : quels sont les faits les plus élémentaires et indiscutables de cette situation, et que construisons-nous à partir de zéro ? Une fois les vraies contraintes séparées des habitudes, vous pouvez explorer plus vite avec l'IA sans perdre votre jugement.",
+            "Relisez ce paragraphe une deuxième fois et demandez-vous où vous acceptez des hypothèses par défaut. À l'ère de l'IA, les meilleurs apprenants posent des questions plus justes."
+          ],
+          takeaways: [
+            "Séparez les contraintes réelles des habitudes ou réglages par défaut.",
+            "Utilisez l'IA pour explorer des options tout en gardant votre discernement.",
+            "Bien cadrer le problème vaut mieux qu'un prompt générique."
+          ],
+          invideoPrompt: "Métaphore visuelle minimaliste comparant un modèle tout fait à des blocs construits depuis les fondations."
+        },
+        invideoEmbedUrl: "",
+        audioUrl: ""
+      },
+      3: {
+        en: {
+          title: "How Large Language Models Actually Work",
+          objective: "Understand tokens, context windows, and next-token prediction so you work with AI accurately.",
+          paragraphs: [
+            "A large language model does not store a giant library of fixed pages like a search engine. Instead, it breaks text into small pieces called tokens and predicts the most probable next token given the surrounding context.",
+            "Because the model operates inside a finite context window, everything you give it—instructions, background facts, examples, and your question—competes for attention. Clear structure inside that context directly improves output quality.",
+            "Understanding prediction rather than 'human-like omniscience' explains both AI's speed and its mistakes. When a model lacks grounded facts, it can still produce fluent-sounding text unless you supply reliable sources and verification checks."
+          ],
+          takeaways: [
+            "LLMs predict tokens within a context window rather than looking up fixed answers.",
+            "Context clarity and structure shape the quality of the response.",
+            "Fluency is not proof of truth—always verify critical facts."
+          ],
+          invideoPrompt: "Clean motion graphic illustrating text splitting into tokens and flowing through a context window."
+        },
+        fr: {
+          title: "Comment Fonctionnent Vraiment les Grands Modèles de Langage",
+          objective: "Comprenez les jetons (tokens), la fenêtre de contexte et la prédiction du jeton suivant pour utiliser l'IA avec précision.",
+          paragraphs: [
+            "Un grand modèle de langage ne stocke pas une bibliothèque géante de pages fixes comme un moteur de recherche. Il découpe le texte en petites unités appelées jetons et prédit le jeton suivant le plus probable selon le contexte.",
+            "Comme le modèle travaille dans une fenêtre de contexte limitée, tout ce que vous lui fournissez—consignes, faits, exemples et question—influence son attention. Une structure claire améliore directement la qualité de la réponse.",
+            "Comprendre cette prédiction explique à la fois la rapidité de l'IA et ses erreurs. Un texte fluide peut rester faux si vous ne fournissez pas de sources fiables et de vérifications."
+          ],
+          takeaways: [
+            "Les LLM prédisent des jetons dans un contexte plutôt que de réciter des pages fixes.",
+            "La clarté et l'organisation du contexte déterminent la qualité de la réponse.",
+            "La fluidité d'écriture ne prouve pas la vérité—vérifiez toujours les faits clés."
+          ],
+          invideoPrompt: "Animation claire montrant un texte découpé en jetons traversant une fenêtre de contexte."
+        },
+        invideoEmbedUrl: "",
+        audioUrl: ""
+      },
+      4: {
+        en: {
+          title: "Context Engineering: Giving AI the Right Room to Think",
+          objective: "Move beyond one-line prompts by supplying role, goal, constraints, examples, and evaluation criteria.",
+          paragraphs: [
+            "Many people blame 'bad AI' when a one-sentence prompt returns a vague answer. Often, the model simply lacked the context a human colleague would need to do the job well.",
+            "Context engineering means curating the exact information the model needs: your objective, audience, boundaries, formatting rules, and one or two strong examples. Less noise and clearer criteria produce cleaner results.",
+            "Before moving to Lesson 5, re-read this section and notice how specific context replaces guesswork. Treat every prompt like a concise creative brief."
+          ],
+          takeaways: [
+            "Vague inputs usually produce vague outputs.",
+            "Include goal, constraints, examples, and desired format in your context.",
+            "Iterative refinement turns a rough draft into a tailored solution."
+          ],
+          invideoPrompt: "Side-by-side visual contrast of a vague prompt vs. a structured context brief."
+        },
+        fr: {
+          title: "Ingénierie du Contexte : Donner à l'IA un Cadre Clair",
+          objective: "Dépassez la simple phrase en fournissant objectif, contraintes, exemples et critères d'évaluation.",
+          paragraphs: [
+            "Beaucoup accusent l'IA lorsqu'une demande en une ligne produit une réponse vague. Souvent, il manquait simplement au modèle le contexte qu'un collègue aurait eu besoin pour bien faire.",
+            "L'ingénierie du contexte consiste à réunir les informations utiles : objectif, public, limites, format souhaité et un ou deux bons exemples. Moins de bruit et des critères clairs donnent de meilleurs résultats.",
+            "Avant de passer à la Leçon 5, relisez ce passage et voyez comment un contexte précis remplace les suppositions. Traitez chaque demande comme un brief clair."
+          ],
+          takeaways: [
+            "Une demande vague produit généralement une réponse vague.",
+            "Précisez l'objectif, les contraintes, des exemples et le format attendu.",
+            "L'ajustement pas à pas transforme un brouillon en solution adaptée."
+          ],
+          invideoPrompt: "Comparaison visuelle côte à côte entre une demande vague et un brief structuré."
+        },
+        invideoEmbedUrl: "",
+        audioUrl: ""
+      },
+      5: {
+        en: {
+          title: "Designing Personal AI Workflows That Save Real Hours",
+          objective: "Turn repeated daily tasks into reliable step-by-step workflows with human checkpoints.",
+          paragraphs: [
+            "A workflow is a repeatable chain of steps—such as gathering notes, summarizing key points, drafting an outline, and checking accuracy. Automating a broken step only speeds up mistakes.",
+            "The most reliable AI workflows keep a human checkpoint right before anything is published, sent, or acted upon. You let software handle drafting, formatting, and sorting while you own quality and decisions.",
+            "Listen to the AI Professor read this again and pick one recurring task from your week that you can map into three clear steps."
+          ],
+          takeaways: [
+            "Map the manual process before automating it.",
+            "Keep a human review step before external action.",
+            "Small weekly workflow improvements compound across Year 1."
+          ],
+          invideoPrompt: "Workflow diagram showing Step 1 Input -> AI Draft -> Human Check -> Final Output."
+        },
+        fr: {
+          title: "Concevoir des Flux de Travail IA Qui Font Gagner du Temps",
+          objective: "Transformez les tâches répétitives en étapes fiables avec des points de contrôle humains.",
+          paragraphs: [
+            "Un flux de travail est une suite d'étapes reproductibles : rassembler des notes, résumer l'essentiel, structurer un plan et vérifier l'exactitude. Automatiser une étape floue ne fait qu'accélérer les erreurs.",
+            "Les flux les plus fiables gardent une validation humaine avant toute publication, envoi ou décision. Vous confiez la mise en forme et le tri aux outils, tout en gardant la maîtrise de la qualité.",
+            "Écoutez à nouveau le Professeur IA et choisissez une tâche récurrente de votre semaine à découper en trois étapes claires."
+          ],
+          takeaways: [
+            "Clarifiez le processus manuel avant de l'automatiser.",
+            "Gardez une vérification humaine avant toute diffusion ou action.",
+            "De petites améliorations hebdomadaires s'accumulent sur toute l'année."
+          ],
+          invideoPrompt: "Schéma montrant Étape 1 Entrée -> Brouillon IA -> Vérification Humaine -> Résultat Final."
+        },
+        invideoEmbedUrl: "",
+        audioUrl: ""
+      }
+    };
+
+    const CURRICULUM_TOPICS_6_TO_100 = [
+      { en: "Active Note-Taking & Idea Linking", fr: "Prise de Notes Active et Connexion d'Idées" },
+      { en: "Spotting Logical Fallacies & Bias", fr: "Repérer les Sophismes et les Biais Logiques" },
+      { en: "Mental Models: Inversion & Second-Order Effects", fr: "Modèles Mentaux : Inversion et Effets de Second Ordre" },
+      { en: "Reading Dense Technical Material Slowly", fr: "Lire Lentement un Contenu Technique Dense" },
+      { en: "Structuring Arguments Clearly", fr: "Structurer un Argumentaire avec Clarté" },
+      { en: "Information Hygiene & Source Credibility", fr: "Hygiène de l'Information et Crédibilité des Sources" },
+      { en: "Time-Blocking & Deep Focus Habits", fr: "Blocage du Temps et Habitudes de Concentration Profonde" },
+      { en: "Turning Confusion into Specific Questions", fr: "Transformer la Confusion en Questions Précises" },
+      { en: "Comparing Frameworks Without Dogma", fr: "Comparer les Méthodes sans Dogmatisme" },
+      { en: "Writing Crisp Summaries from Long Sources", fr: "Rédiger des Résumés Clairs à Partir de Sources Longues" },
+      { en: "Root-Cause Analysis (5 Whys & Fishbone)", fr: "Analyse des Causes Racines (5 Pourquoi et Ishikawa)" },
+      { en: "Decision Matrices & Trade-Offs", fr: "Matrices de Décision et Arbitrages" },
+      { en: "Building a Personal Knowledge Base", fr: "Construire une Base de Connaissances Personnelle" },
+      { en: "Memory Anchors & Spaced Review", fr: "Ancrages de Mémoire et Révision Espacée" },
+      { en: "Mastering Year-1 Thinking Foundations", fr: "Synthèse des Fondamentaux de Réflexion (1re Année)" },
+      { en: "Embeddings, Vector Search & Retrieval (RAG)", fr: "Vecteurs, Recherche Sémantique et Récupération (RAG)" },
+      { en: "Multimodal AI: Text, Voice, Image & Video", fr: "IA Multimodale : Texte, Voix, Image et Vidéo" },
+      { en: "Hallucinations: Why They Happen & How to Catch Them", fr: "Hallucinations IA : Causes et Détection" },
+      { en: "Prompting vs. System Instructions & Guardrails", fr: "Prompts, Instructions Système et Garde-Fous" },
+      { en: "Temperature, Determinism & Model Selection", fr: "Température, Déterminisme et Choix du Modèle" },
+      { en: "Data Privacy, Consent & AI Ethics", fr: "Confidentialité des Données, Consentement et Éthique IA" },
+      { en: "Copyright, Attribution & Responsible Use", fr: "Droits d'Auteur, Attribution et Usage Responsable" },
+      { en: "Evaluating AI Outputs with Rubrics", fr: "Évaluer les Réponses de l'IA avec des Critères" },
+      { en: "When NOT to Use AI", fr: "Quand Ne Pas Utiliser l'IA" },
+      { en: "Fact-Checking & Citation Discipline", fr: "Vérification des Faits et Rigueur des Citations" },
+      { en: "Understanding APIs & Web Basics", fr: "Comprendre les API et les Bases du Web" },
+      { en: "Working with Spreadsheets & Structured Data", fr: "Travailler avec les Tableurs et Données Structurées" },
+      { en: "AI-Assisted Coding for Beginners", fr: "Programmation Assistée par IA pour Débutants" },
+      { en: "Reading Code & Debugging with AI", fr: "Lire du Code et Déboguer avec l'IA" },
+      { en: "Version Control Basics with Git & GitHub", fr: "Bases du Versioning avec Git et GitHub" },
+      { en: "Automating Repetitive Text & File Tasks", fr: "Automatiser les Tâches Répétitives de Texte et Fichiers" },
+      { en: "Building Simple Web Pages & Tools", fr: "Créer des Pages Web et Outils Simples" },
+      { en: "Cleaning Messy Data Safely", fr: "Nettoyer des Données Imparfaites en Sécurité" },
+      { en: "Testing Edge Cases & Failure Modes", fr: "Tester les Cas Limites et Modes de Défaillance" },
+      { en: "Documenting Your Tools for Others", fr: "Documenter Vos Outils pour d'Autres Personnes" },
+      { en: "Introduction to AI Agents & Tool Use", fr: "Introduction aux Agents IA et à l'Usage d'Outils" },
+      { en: "Multi-Step Planning & Task Decomposition", fr: "Planification en Étapes et Découpage des Tâches" },
+      { en: "Deep Research Workflows with Source Synthesis", fr: "Recherche Approfondie et Synthèse de Sources" },
+      { en: "Comparing Conflicting Claims Fairly", fr: "Comparer les Affirmations Contradictoires avec Justesse" },
+      { en: "Decision-Making Under Uncertainty", fr: "Décider en Situation d'Incertitude" },
+      { en: "Risk Assessment & Contingency Planning", fr: "Évaluation des Risques et Plans de Secours" },
+      { en: "Personal Productivity Systems with AI", fr: "Systèmes de Productivité Personnelle avec l'IA" },
+      { en: "Turning Research into Action Plans", fr: "Transformer la Recherche en Plans d'Action" },
+      { en: "Auditing Your Own Biases", fr: "Examiner Ses Propres Biais" },
+      { en: "Year-1 Systems & Agent Mastery Review", fr: "Bilan 1re Année : Systèmes et Agents IA" },
+      { en: "Clear Writing: Lead with the Point", fr: "Écrire Clairement : Aller à l'Essentiel d'Abord" },
+      { en: "Storytelling & Explaining Complex Ideas", fr: "Récit et Vulgarisation d'Idées Complexes" },
+      { en: "Visual Thinking & Slide/Diagram Structure", fr: "Pensée Visuelle, Schémas et Présentations" },
+      { en: "Creating Visual Explainers with InVideo", fr: "Créer des Vidéos Explicatives avec InVideo" },
+      { en: "Scripting Short Educational Videos", fr: "Écrire le Scénario de Courtes Vidéos Pédagogiques" },
+      { en: "Voice, Pacing & Tone in Communication", fr: "Voix, Rythme et Ton dans la Communication" },
+      { en: "Designing a Public Learning Portfolio", fr: "Concevoir un Portfolio d'Apprentissage Public" },
+      { en: "Giving & Receiving Constructive Feedback", fr: "Donner et Recevoir un Retour Constructif" },
+      { en: "Collaborating Across Teams & Time Zones", fr: "Collaborer entre Équipes et Fuseaux Horaires" },
+      { en: "Ethics of Synthetic Media & Transparency", fr: "Éthique des Médias Synthétiques et Transparence" },
+      { en: "Adapting When Tools Change Every Month", fr: "S'Adapter Quand les Outils Évoluent Chaque Mois" },
+      { en: "Career Positioning in an AI-Augmented Economy", fr: "Positionnement Professionnel dans une Économie Augmentée par l'IA" },
+      { en: "Solving Real Community & Workplace Problems", fr: "Résoudre des Problèmes Concrets de Terrain" },
+      { en: "Capstone Planning: Your Year-1 Project", fr: "Préparation du Projet de Fin de 1re Année" },
+      { en: "Graduating Year 1 as a Lifelong Learner", fr: "Clôturer la 1re Année en Apprenant Autonome" }
+    ];
+
+    function buildAllLessons() {
+      const lessons = [];
+      for (let num = 1; num <= 100; num++) {
+        const trackNum = Math.ceil(num / 20);
+        if (STARTER_LESSONS[num]) {
+          lessons.push({
+            number: num,
+            trackNum,
+            invideoEmbedUrl: STARTER_LESSONS[num].invideoEmbedUrl || "",
+            audioUrl: STARTER_LESSONS[num].audioUrl || "",
+            en: STARTER_LESSONS[num].en,
+            fr: STARTER_LESSONS[num].fr
+          });
+        } else {
+          const item = CURRICULUM_TOPICS_6_TO_100[num - 6] || {
+            en: `Modern AI-Era Topic ${num}`,
+            fr: `Thème Moderne de l'Ère IA ${num}`
+          };
+          const nextNum = Math.min(100, num + 1);
+          lessons.push({
+            number: num,
+            trackNum,
+            invideoEmbedUrl: "",
+            audioUrl: "",
+            en: {
+              title: item.en,
+              objective: `Build practical mastery in "${item.en}" through multi-pass reading, AI Professor narration, and reflection.`,
+              paragraphs: [
+                `Welcome to Lesson ${num} of Gesner Deslandes Lifelong Learning University inside ${TRACKS[trackNum].en}. Today's focus is ${item.en}, a core capability for navigating modern work and learning alongside AI.`,
+                `Begin with a calm first read to see how ${item.en} fits into the bigger picture. Then read a second time while listening to the AI Professor narration, paying attention to how concepts connect to real tasks you perform.`,
+                `For your third pass, pause and ask how you can apply ${item.en} this week. Writing a short summary in your own words reveals what you truly grasp and what deserves another look.`
+              ],
+              takeaways: [
+                `Core concept: ${item.en} strengthens practical judgment in the AI era.`,
+                `Read 2–3 times and listen to the AI Professor to deepen retention.`,
+                `Apply the idea to a concrete example before moving to Lesson ${nextNum}.`
+              ],
+              invideoPrompt: `Visual explainer for Lesson ${num}: "${item.en}" in the Gesner Deslandes University style.`
+            },
+            fr: {
+              title: item.fr,
+              objective: `Développez une maîtrise pratique de « ${item.fr} » grâce à la lecture en plusieurs passes, la voix du Professeur IA et la réflexion.`,
+              paragraphs: [
+                `Bienvenue à la Leçon ${num} de l'Université d'Apprentissage Continu Gesner Deslandes dans le ${TRACKS[trackNum].fr}. Aujourd'hui, nous explorons « ${item.fr} », une compétence essentielle à l'ère de l'IA.`,
+                `Commencez par une première lecture calme pour saisir la vue d'ensemble. Relisez ensuite une deuxième fois en écoutant le Professeur IA afin de relier les notions à vos tâches concrètes.`,
+                `Lors de la troisième passe, demandez-vous comment appliquer « ${item.fr} » cette semaine. Résumer l'idée avec vos propres mots montre ce que vous maîtrisez vraiment.`
+              ],
+              takeaways: [
+                `Idée centrale : « ${item.fr} » renforce votre discernement à l'ère de l'IA.`,
+                `Lisez 2 à 3 fois et écoutez le Professeur IA pour mieux mémoriser.`,
+                `Appliquez ce principe à un exemple concret avant la Leçon ${nextNum}.`
+              ],
+              invideoPrompt: `Capsule visuelle pour la Leçon ${num} : « ${item.fr} » dans le style de l'Université Gesner Deslandes.`
+            }
+          });
+        }
+      }
+      return lessons;
+    }
+
+    const LESSONS = buildAllLessons();
+    const STORAGE_KEY = "gdllu_year1_state_v2";
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          return {
+            lang: parsed.lang === "fr" ? "fr" : "en",
+            currentLesson: parsed.currentLesson || 1,
+            currentPass: parsed.currentPass || 1,
+            speechRate: parsed.speechRate || 1.0,
+            lessons: parsed.lessons || {}
+          };
+        }
+      } catch (e) {}
+      return {
+        lang: "en",
+        currentLesson: 1,
+        currentPass: 1,
+        speechRate: 1.0,
+        lessons: {}
+      };
+    }
+
+    let state = loadState();
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    function t() {
+      return UI_STRINGS[state.lang] || UI_STRINGS.en;
+    }
+
+    function getLessonContent(lesson) {
+      return lesson[state.lang] || lesson.en;
+    }
+
+    function getLessonProgress(num) {
+      if (!state.lessons[num]) {
+        state.lessons[num] = {
+          reads: 0,
+          passes: { 1: false, 2: false, 3: false },
+          note: ""
+        };
+      }
+      return state.lessons[num];
+    }
+
+    function isLessonComplete(num) {
+      const p = getLessonProgress(num);
+      return Boolean(p.passes[1] && p.passes[2] && p.passes[3]);
+    }
+
+    function stopSpeech() {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      document.querySelectorAll(".reading-prose p.speaking").forEach((el) => {
+        el.classList.remove("speaking");
+      });
+      const customAudio = document.getElementById("customAudioPlayer");
+      if (customAudio && !customAudio.paused) {
+        customAudio.pause();
+      }
+    }
+
+    function renderStaticChrome() {
+      const strings = t();
+      document.documentElement.lang = state.lang;
+      document.getElementById("langToggleBtn").textContent = strings.langBtn;
+      document.getElementById("brandTitle").textContent = strings.brandTitle;
+      document.getElementById("brandSub").textContent = strings.brandSub;
+      document.getElementById("resetProgressBtn").textContent = strings.resetBtn;
+      document.getElementById("syllabusHeading").textContent = strings.syllabusHeading;
+      document.getElementById("lessonSearch").placeholder = strings.searchPlaceholder;
+
+      const trackSelect = document.getElementById("trackFilter");
+      const prevTrackVal = trackSelect.value || "all";
+      trackSelect.innerHTML = `<option value="all">${escapeHtml(strings.allTracks)}</option>`;
+      [1, 2, 3, 4, 5].forEach((n) => {
+        const opt = document.createElement("option");
+        opt.value = String(n);
+        opt.textContent = TRACKS[n][state.lang];
+        trackSelect.appendChild(opt);
+      });
+      trackSelect.value = prevTrackVal;
+
+      document.getElementById("pass1Label").textContent = strings.pass1;
+      document.getElementById("pass1Sub").textContent = strings.pass1Sub;
+      document.getElementById("pass2Label").textContent = strings.pass2;
+      document.getElementById("pass2Sub").textContent = strings.pass2Sub;
+      document.getElementById("pass3Label").textContent = strings.pass3;
+      document.getElementById("pass3Sub").textContent = strings.pass3Sub;
+
+      document.getElementById("playAudioBtn").textContent = strings.playAudio;
+      document.getElementById("stopAudioBtn").textContent = strings.stopAudio;
+      document.getElementById("speedLabel").textContent = strings.speedLabel;
+      document.getElementById("logReadBtn").textContent = strings.logReadBtn;
+      document.getElementById("completePassBtn").textContent = strings.completePassBtn;
+
+      document.getElementById("invideoHeading").textContent = strings.invideoHeading;
+      document.getElementById("takeawaysHeading").textContent = strings.takeawaysHeading;
+      document.getElementById("reflectionHeading").textContent = strings.reflectionHeading;
+      document.getElementById("reflectionPrompt").textContent = strings.reflectionPrompt;
+      document.getElementById("reflectionInput").placeholder = strings.reflectionPlaceholder;
+      document.getElementById("saveNoteBtn").textContent = strings.saveNoteBtn;
+
+      document.getElementById("prevLessonBtn").textContent = strings.prevBtn;
+      document.getElementById("nextLessonBtn").textContent = strings.nextBtn;
+      document.getElementById("footerTip").textContent = strings.footerTip;
+    }
+
+    function renderLessonList() {
+      const strings = t();
+      const listEl = document.getElementById("lessonList");
+      const trackVal = document.getElementById("trackFilter").value;
+      const query = document.getElementById("lessonSearch").value.trim().toLowerCase();
+
+      const filtered = LESSONS.filter((l) => {
+        const content = getLessonContent(l);
+        const matchesTrack = trackVal === "all" || String(l.trackNum) === trackVal;
+        const matchesQuery =
+          !query ||
+          String(l.number).includes(query) ||
+          content.title.toLowerCase().includes(query) ||
+          l.en.title.toLowerCase().includes(query) ||
+          l.fr.title.toLowerCase().includes(query);
+        return matchesTrack && matchesQuery;
+      });
+
+      document.getElementById("filteredCount").textContent = strings.shownCount(filtered.length);
+      listEl.innerHTML = "";
+
+      filtered.forEach((lesson) => {
+        const content = getLessonContent(lesson);
+        const prog = getLessonProgress(lesson.number);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `lesson-item ${lesson.number === state.currentLesson ? "active" : ""}`;
+        btn.innerHTML = `
+          <div>
+            <span class="lesson-item-num">${state.lang === "fr" ? "Leçon" : "Lesson"} ${String(lesson.number).padStart(2, "0")}</span>
+            <span class="lesson-item-title">${escapeHtml(content.title)}</span>
+          </div>
+          <div class="pass-dots">
+            <span class="pass-dot ${prog.passes[1] ? "done" : ""}"></span>
+            <span class="pass-dot ${prog.passes[2] ? "done" : ""}"></span>
+            <span class="pass-dot ${prog.passes[3] ? "done" : ""}"></span>
+          </div>
+        `;
+        btn.addEventListener("click", () => {
+          stopSpeech();
+          state.currentLesson = lesson.number;
+          saveState();
+          renderAll();
+        });
+        listEl.appendChild(btn);
+      });
+    }
+
+    function renderBook() {
+      const strings = t();
+      const lesson = LESSONS[state.currentLesson - 1];
+      const content = getLessonContent(lesson);
+      const prog = getLessonProgress(lesson.number);
+      const trackTitle = TRACKS[lesson.trackNum][state.lang];
+
+      document.getElementById("currentTrackBadge").textContent = trackTitle;
+      document.getElementById("currentPageLabel").textContent = strings.pageLabel(lesson.number);
+      document.getElementById("lessonKicker").textContent = strings.lessonKicker(lesson.number);
+      document.getElementById("lessonTitle").textContent = content.title;
+      document.getElementById("lessonObjective").textContent = content.objective;
+
+      [1, 2, 3].forEach((pNum) => {
+        const tab = document.querySelector(`.pass-tab[data-pass="${pNum}"]`);
+        tab.classList.toggle("active", state.currentPass === pNum);
+        document.getElementById(`checkPass${pNum}`).textContent = prog.passes[pNum] ? "✓" : "○";
+      });
+
+      const donePasses = [1, 2, 3].filter((n) => prog.passes[n]).length;
+      document.getElementById("passSummaryText").textContent = strings.passesCompleted(donePasses);
+
+      const proseEl = document.getElementById("readingProse");
+      proseEl.innerHTML = content.paragraphs
+        .map((para, idx) => `<p data-para-index="${idx}">${escapeHtml(para)}</p>`)
+        .join("");
+
+      document.getElementById("readCountText").textContent = strings.readsRecorded(prog.reads);
+
+      const customAudio = document.getElementById("customAudioPlayer");
+      if (lesson.audioUrl) {
+        customAudio.src = lesson.audioUrl;
+        customAudio.style.display = "block";
+        document.getElementById("audioStatus").textContent = strings.audioReadyCustom;
+      } else {
+        customAudio.style.display = "none";
+        customAudio.removeAttribute("src");
+        document.getElementById("audioStatus").textContent = strings.audioReadySpeech(state.speechRate);
+      }
+
+      const invideoEl = document.getElementById("invideoContainer");
+      if (lesson.invideoEmbedUrl) {
+        invideoEl.innerHTML = `<iframe class="video-frame" src="${escapeAttribute(lesson.invideoEmbedUrl)}" allowfullscreen title="InVideo visual for ${escapeAttribute(content.title)}"></iframe>`;
+      } else {
+        invideoEl.innerHTML = `
+          <div class="video-placeholder">
+            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:#fb923c;font-weight:700;">
+              ${escapeHtml(strings.invideoSlotReady)}
+            </div>
+            <p>${escapeHtml(content.invideoPrompt)}</p>
+            <span style="font-size:0.75rem;color:#a8a29e;">
+              ${escapeHtml(strings.invideoHelp)}
+            </span>
+          </div>
+        `;
+      }
+
+      const takeawaysEl = document.getElementById("takeawaysList");
+      takeawaysEl.innerHTML = content.takeaways.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+
+      document.getElementById("reflectionInput").value = prog.note || "";
+      document.getElementById("savedNoteBadge").textContent = prog.note
+        ? strings.savedBadge
+        : strings.notSavedBadge;
+
+      document.getElementById("prevLessonBtn").disabled = lesson.number <= 1;
+      document.getElementById("nextLessonBtn").disabled = lesson.number >= 100;
+
+      const completedCount = LESSONS.filter((l) => isLessonComplete(l.number)).length;
+      document.getElementById("overallProgress").textContent = strings.overallProgress(completedCount);
+    }
+
+    function renderAll() {
+      renderStaticChrome();
+      renderLessonList();
+      renderBook();
+    }
+
+    function playAiProfessor() {
+      const strings = t();
+      const lesson = LESSONS[state.currentLesson - 1];
+      const content = getLessonContent(lesson);
+      const prog = getLessonProgress(lesson.number);
+
+      if (lesson.audioUrl) {
+        const customAudio = document.getElementById("customAudioPlayer");
+        customAudio.playbackRate = state.speechRate;
+        customAudio.play();
+        prog.reads += 1;
+        saveState();
+        renderBook();
+        return;
+      }
+
+      if (!("speechSynthesis" in window)) {
+        document.getElementById("audioStatus").textContent = strings.speechUnavailable;
+        return;
+      }
+
+      stopSpeech();
+      prog.reads += 1;
+      saveState();
+      renderBook();
+
+      const paras = document.querySelectorAll("#readingProse p");
+      let idx = 0;
+
+      function speakNext() {
+        paras.forEach((p) => p.classList.remove("speaking"));
+        if (idx >= content.paragraphs.length) {
+          document.getElementById("audioStatus").textContent = strings.speechFinished;
+          return;
+        }
+        const text = content.paragraphs[idx];
+        if (paras[idx]) {
+          paras[idx].classList.add("speaking");
+          paras[idx].scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = state.lang === "fr" ? "fr-FR" : "en-US";
+        utter.rate = state.speechRate;
+        utter.onend = () => {
+          idx += 1;
+          speakNext();
+        };
+        utter.onerror = () => {
+          document.getElementById("audioStatus").textContent = strings.audioStopped;
+        };
+        document.getElementById("audioStatus").textContent = strings.speechSpeaking(
+          idx + 1,
+          content.paragraphs.length,
+          state.speechRate
+        );
+        window.speechSynthesis.speak(utter);
+      }
+
+      speakNext();
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function escapeAttribute(str) {
+      return escapeHtml(str).replaceAll("'", "&#39;");
+    }
+
+    document.getElementById("langToggleBtn").addEventListener("click", () => {
+      stopSpeech();
+      state.lang = state.lang === "en" ? "fr" : "en";
+      saveState();
+      renderAll();
+    });
+
+    document.querySelectorAll(".pass-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        state.currentPass = Number(tab.dataset.pass);
+        saveState();
+        renderBook();
+      });
+    });
+
+    document.querySelectorAll(".speed-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.speechRate = Number(btn.dataset.rate);
+        document.querySelectorAll(".speed-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        saveState();
+        renderBook();
+      });
+    });
+
+    document.getElementById("playAudioBtn").addEventListener("click", playAiProfessor);
+    document.getElementById("stopAudioBtn").addEventListener("click", () => {
+      stopSpeech();
+      document.getElementById("audioStatus").textContent = t().audioStopped;
+    });
+
+    document.getElementById("logReadBtn").addEventListener("click", () => {
+      const prog = getLessonProgress(state.currentLesson);
+      prog.reads += 1;
+      saveState();
+      renderBook();
+    });
+
+    document.getElementById("completePassBtn").addEventListener("click", () => {
+      const prog = getLessonProgress(state.currentLesson);
+      prog.passes[state.currentPass] = true;
+      if (state.currentPass < 3) {
+        state.currentPass += 1;
+      }
+      saveState();
+      renderAll();
+    });
+
+    document.getElementById("saveNoteBtn").addEventListener("click", () => {
+      const prog = getLessonProgress(state.currentLesson);
+      prog.note = document.getElementById("reflectionInput").value.trim();
+      saveState();
+      document.getElementById("savedNoteBadge").textContent = t().savedBadge;
+    });
+
+    document.getElementById("prevLessonBtn").addEventListener("click", () => {
+      if (state.currentLesson > 1) {
+        stopSpeech();
+        state.currentLesson -= 1;
+        state.currentPass = 1;
+        saveState();
+        renderAll();
+      }
+    });
+
+    document.getElementById("nextLessonBtn").addEventListener("click", () => {
+      if (state.currentLesson < 100) {
+        stopSpeech();
+        state.currentLesson += 1;
+        state.currentPass = 1;
+        saveState();
+        renderAll();
+      }
+    });
+
+    document.getElementById("trackFilter").addEventListener("change", renderLessonList);
+    document.getElementById("lessonSearch").addEventListener("input", renderLessonList);
+
+    document.getElementById("resetProgressBtn").addEventListener("click", () => {
+      if (confirm(t().resetConfirm)) {
+        stopSpeech();
+        const currentLang = state.lang;
+        state = {
+          lang: currentLang,
+          currentLesson: 1,
+          currentPass: 1,
+          speechRate: 1.0,
+          lessons: {}
+        };
+        saveState();
+        renderAll();
+      }
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
