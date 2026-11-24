@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gesner Deslandes Lifelong Learning University — Year 1 Codex</title>
+  <title>Gesner Deslandes Lifelong Learning University — NVIDIA AI Codex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -12,22 +12,25 @@
   />
   <style>
     :root {
-      --bg-desk: #1c1917;
-      --bg-sidebar: #26221f;
-      --bg-paper: #fbf8f1;
-      --bg-paper-alt: #f3ede0;
-      --ink-primary: #1f1b18;
-      --ink-secondary: #575049;
-      --ink-muted: #857c72;
-      --ink-on-dark: #f5f2eb;
-      --ink-on-dark-muted: #b5aca2;
-      --accent: #9a3412;
-      --accent-soft: #ffedd5;
-      --success: #166534;
+      --nv-green: #76b900;
+      --nv-green-bright: #8ce000;
+      --nv-green-dark: #4f7d00;
+      --nv-green-soft: rgba(118, 185, 0, 0.14);
+      --bg-desk: #0d0f0c;
+      --bg-sidebar: #141712;
+      --bg-card-dark: #1a1e17;
+      --bg-paper: #fbfaf6;
+      --bg-paper-alt: #f1efe7;
+      --ink-primary: #171a14;
+      --ink-secondary: #4e5449;
+      --ink-muted: #788072;
+      --ink-on-dark: #f4f7f1;
+      --ink-on-dark-muted: #a8b0a2;
+      --success: #15803d;
       --success-soft: #dcfce7;
-      --border-light: #e4dccb;
-      --border-dark: #3b3530;
-      --shadow-book: 0 24px 60px rgba(0, 0, 0, 0.45);
+      --border-light: #dfe2d7;
+      --border-dark: #2a3025;
+      --shadow-book: 0 24px 60px rgba(0, 0, 0, 0.55);
     }
 
     * {
@@ -38,16 +41,19 @@
 
     body {
       font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #2c2623 0%, var(--bg-desk) 75%);
+      background:
+        radial-gradient(circle at 85% 0%, rgba(118, 185, 0, 0.14) 0%, transparent 42%),
+        radial-gradient(circle at 15% 10%, rgba(118, 185, 0, 0.08) 0%, transparent 38%),
+        var(--bg-desk);
       color: var(--ink-primary);
       min-height: 100vh;
       line-height: 1.6;
     }
 
-    /* Top University Header */
+    /* Top NVIDIA-Styled University Bar */
     .topbar {
-      background: rgba(24, 21, 19, 0.94);
-      backdrop-filter: blur(8px);
+      background: rgba(15, 18, 13, 0.94);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-dark);
       color: var(--ink-on-dark);
       padding: 0.85rem 1.5rem;
@@ -58,7 +64,18 @@
       gap: 1rem;
       position: sticky;
       top: 0;
-      z-index: 30;
+      z-index: 40;
+    }
+
+    .topbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--nv-green), var(--nv-green-bright), transparent);
+      opacity: 0.85;
     }
 
     .brand {
@@ -68,17 +85,18 @@
     }
 
     .crest {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #c2410c, #7c2d12);
+      background: linear-gradient(135deg, var(--nv-green), var(--nv-green-dark));
       display: grid;
       place-items: center;
-      font-family: "Newsreader", Georgia, serif;
-      font-weight: 600;
-      font-size: 1.15rem;
-      color: #fff7ed;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #0b0d09;
+      border: 1px solid rgba(140, 224, 0, 0.5);
+      box-shadow: 0 0 18px rgba(118, 185, 0, 0.28);
       flex-shrink: 0;
     }
 
@@ -97,12 +115,12 @@
     .topbar-controls {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.6rem;
       flex-wrap: wrap;
     }
 
     .overall-progress {
-      background: var(--bg-sidebar);
+      background: var(--bg-card-dark);
       border: 1px solid var(--border-dark);
       padding: 0.4rem 0.8rem;
       border-radius: 999px;
@@ -110,21 +128,30 @@
       color: var(--ink-on-dark);
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.45rem;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--nv-green-bright);
+      box-shadow: 0 0 8px var(--nv-green);
     }
 
     .btn {
       font-family: inherit;
-      font-size: 0.85rem;
-      font-weight: 500;
+      font-size: 0.84rem;
+      font-weight: 600;
       border-radius: 8px;
-      padding: 0.5rem 0.9rem;
+      padding: 0.5rem 0.88rem;
       cursor: pointer;
       border: 1px solid transparent;
       transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
+      text-decoration: none;
     }
 
     .btn:disabled {
@@ -132,13 +159,14 @@
       cursor: not-allowed;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
+    .btn-nv {
+      background: var(--nv-green);
+      color: #0c0f0a;
+      border-color: var(--nv-green-bright);
     }
 
-    .btn-primary:hover:not(:disabled) {
-      background: #7c2d12;
+    .btn-nv:hover:not(:disabled) {
+      background: var(--nv-green-bright);
     }
 
     .btn-secondary {
@@ -148,33 +176,33 @@
     }
 
     .btn-secondary:hover:not(:disabled) {
-      background: #e9e0ce;
+      background: #e5e2d7;
     }
 
     .btn-ghost-dark {
-      background: transparent;
+      background: var(--bg-card-dark);
       color: var(--ink-on-dark);
       border-color: var(--border-dark);
     }
 
     .btn-ghost-dark:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--nv-green);
+      color: var(--nv-green-bright);
     }
 
     .btn-lang {
-      background: #fff7ed;
-      color: var(--accent);
-      border-color: #fed7aa;
-      font-weight: 600;
+      background: var(--nv-green-soft);
+      color: var(--nv-green-bright);
+      border-color: rgba(118, 185, 0, 0.45);
     }
 
     .btn-lang:hover:not(:disabled) {
-      background: #ffedd5;
+      background: rgba(118, 185, 0, 0.24);
     }
 
-    /* Main Workspace Layout */
+    /* Workspace Grid */
     .workspace {
-      max-width: 1440px;
+      max-width: 1460px;
       margin: 1.5rem auto;
       padding: 0 1.25rem 2.5rem;
       display: grid;
@@ -191,8 +219,8 @@
       border-radius: 16px;
       padding: 1.1rem;
       position: sticky;
-      top: 78px;
-      max-height: calc(100vh - 98px);
+      top: 80px;
+      max-height: calc(100vh - 100px);
       display: flex;
       flex-direction: column;
       gap: 0.85rem;
@@ -205,16 +233,16 @@
     }
 
     .index-header h2 {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--ink-on-dark-muted);
+      color: var(--nv-green-bright);
     }
 
     .search-input,
     .track-select {
       width: 100%;
-      background: #1a1715;
+      background: #0d0f0c;
       color: var(--ink-on-dark);
       border: 1px solid var(--border-dark);
       border-radius: 8px;
@@ -225,7 +253,7 @@
 
     .search-input:focus,
     .track-select:focus {
-      outline: 2px solid #c2410c;
+      outline: 2px solid var(--nv-green);
       outline-offset: 1px;
     }
 
@@ -249,22 +277,22 @@
       justify-content: space-between;
       align-items: center;
       gap: 0.5rem;
-      transition: background 0.15s ease;
+      transition: all 0.15s ease;
     }
 
     .lesson-item:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(118, 185, 0, 0.08);
     }
 
     .lesson-item.active {
-      background: rgba(194, 65, 12, 0.22);
-      border-color: rgba(234, 88, 12, 0.55);
+      background: var(--nv-green-soft);
+      border-color: rgba(118, 185, 0, 0.6);
     }
 
     .lesson-item-num {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #fb923c;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--nv-green-bright);
       display: block;
     }
 
@@ -284,14 +312,14 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #44403c;
+      background: #2f362a;
     }
 
     .pass-dot.done {
-      background: #4ade80;
+      background: var(--nv-green-bright);
     }
 
-    /* Book Spread Container */
+    /* Book Spread */
     .book-shell {
       background: var(--bg-paper);
       border-radius: 18px;
@@ -314,18 +342,19 @@
     }
 
     .track-badge {
-      background: var(--accent-soft);
-      color: var(--accent);
+      background: #141811;
+      color: var(--nv-green-bright);
       font-weight: 600;
-      padding: 0.25rem 0.65rem;
+      padding: 0.25rem 0.7rem;
       border-radius: 999px;
       font-size: 0.76rem;
+      border: 1px solid rgba(118, 185, 0, 0.35);
     }
 
     .book-pages {
       display: grid;
-      grid-template-columns: 1.35fr 0.85fr;
-      min-height: 640px;
+      grid-template-columns: 1.32fr 0.88fr;
+      min-height: 660px;
     }
 
     .left-page {
@@ -334,18 +363,18 @@
     }
 
     .right-page {
-      padding: 1.75rem;
-      background: #f8f3e8;
+      padding: 1.65rem;
+      background: #f5f3eb;
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1.15rem;
     }
 
     .lesson-kicker {
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--accent);
+      color: var(--nv-green-dark);
       font-weight: 700;
       margin-bottom: 0.35rem;
     }
@@ -368,7 +397,7 @@
       border-bottom: 1px solid var(--border-light);
     }
 
-    /* Three-Pass Loop Switcher */
+    /* Three-Pass Loop */
     .pass-tabs {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -387,9 +416,10 @@
     }
 
     .pass-tab.active {
-      background: var(--ink-primary);
+      background: #131710;
       color: #fff;
-      border-color: var(--ink-primary);
+      border-color: var(--nv-green);
+      box-shadow: 0 0 0 1px rgba(118, 185, 0, 0.35);
     }
 
     .pass-tab-top {
@@ -400,6 +430,10 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
+    }
+
+    .pass-tab.active .pass-tab-top span:first-child {
+      color: var(--nv-green-bright);
     }
 
     .pass-tab-sub {
@@ -453,9 +487,10 @@
     }
 
     .speed-btn.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
+      background: #131710;
+      color: var(--nv-green-bright);
+      border-color: var(--nv-green);
+      font-weight: 600;
     }
 
     /* Reading Body */
@@ -474,7 +509,8 @@
     }
 
     .reading-prose p.speaking {
-      background: #fef3c7;
+      background: rgba(118, 185, 0, 0.2);
+      border-left: 3px solid var(--nv-green-dark);
     }
 
     .reading-count-note {
@@ -492,39 +528,124 @@
       flex-wrap: wrap;
     }
 
-    /* Right Page Cards: InVideo & Active Recall */
+    /* Right Margin Cards */
     .side-card {
       background: #fff;
       border: 1px solid var(--border-light);
       border-radius: 12px;
-      padding: 1.1rem;
+      padding: 1.05rem;
     }
 
     .side-card h3 {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
       color: var(--ink-secondary);
+      margin-bottom: 0.6rem;
+    }
+
+    /* Interactive NVIDIA AI Studio Card */
+    .nv-studio-card {
+      background: #121510;
+      color: var(--ink-on-dark);
+      border: 1px solid rgba(118, 185, 0, 0.45);
+      border-radius: 12px;
+      padding: 1.05rem;
+      box-shadow: inset 0 0 24px rgba(118, 185, 0, 0.06);
+    }
+
+    .nv-studio-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 0.65rem;
+    }
+
+    .nv-studio-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--nv-green-bright);
+    }
+
+    .nv-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.16rem 0.5rem;
+      border-radius: 999px;
+      background: var(--nv-green-soft);
+      color: var(--nv-green-bright);
+      border: 1px solid rgba(118, 185, 0, 0.4);
+    }
+
+    .nv-mode-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .nv-mode-btn {
+      background: #1b2018;
+      color: var(--ink-on-dark-muted);
+      border: 1px solid var(--border-dark);
+      border-radius: 7px;
+      padding: 0.38rem 0.4rem;
+      font-size: 0.74rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .nv-mode-btn.active {
+      background: var(--nv-green);
+      color: #0b0d09;
+      border-color: var(--nv-green-bright);
+    }
+
+    .nv-telemetry-box {
+      background: #0b0d09;
+      border: 1px solid #262c22;
+      border-radius: 8px;
+      padding: 0.65rem 0.75rem;
+      font-size: 0.78rem;
+      color: #d6e0ce;
+      margin-bottom: 0.65rem;
+    }
+
+    .nv-meter-track {
+      height: 6px;
+      border-radius: 999px;
+      background: #23291f;
+      overflow: hidden;
+      margin-top: 0.4rem;
+    }
+
+    .nv-meter-fill {
+      height: 100%;
+      width: 78%;
+      background: linear-gradient(90deg, var(--nv-green-dark), var(--nv-green-bright));
+      transition: width 0.25s ease;
     }
 
     .video-box {
       border-radius: 10px;
       overflow: hidden;
-      background: #181513;
-      color: #f5f2eb;
-      border: 1px solid #2e2926;
+      background: #121510;
+      color: #f4f7f1;
+      border: 1px solid #282f24;
     }
 
     .video-placeholder {
-      padding: 1.25rem;
+      padding: 1.15rem;
       text-align: center;
     }
 
     .video-placeholder p {
-      font-size: 0.84rem;
-      color: #d6cfc7;
-      margin: 0.5rem 0 0.85rem;
+      font-size: 0.83rem;
+      color: #c8d1c2;
+      margin: 0.45rem 0 0.75rem;
     }
 
     .video-frame {
@@ -536,7 +657,7 @@
 
     .takeaways-list {
       padding-left: 1.15rem;
-      font-size: 0.9rem;
+      font-size: 0.89rem;
       color: var(--ink-primary);
       display: flex;
       flex-direction: column;
@@ -545,8 +666,8 @@
 
     .reflection-area {
       width: 100%;
-      min-height: 82px;
-      margin-top: 0.5rem;
+      min-height: 78px;
+      margin-top: 0.45rem;
       border: 1px solid var(--border-light);
       border-radius: 8px;
       padding: 0.6rem;
@@ -554,6 +675,37 @@
       font-size: 0.85rem;
       resize: vertical;
       background: var(--bg-paper);
+    }
+
+    .dev-card-name {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--ink-primary);
+    }
+
+    .dev-card-role {
+      font-size: 0.78rem;
+      color: var(--nv-green-dark);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.55rem;
+    }
+
+    .dev-info-list {
+      list-style: none;
+      font-size: 0.83rem;
+      color: var(--ink-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 0.38rem;
+    }
+
+    .dev-info-list a {
+      color: var(--nv-green-dark);
+      font-weight: 600;
+      word-break: break-word;
     }
 
     .book-footer {
@@ -564,6 +716,48 @@
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
+    }
+
+    /* NVIDIA Developer & System Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 60;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 540px;
+      background: #141712;
+      color: var(--ink-on-dark);
+      border: 1px solid rgba(118, 185, 0, 0.55);
+      border-radius: 16px;
+      padding: 1.4rem;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .modal-header h2 {
+      font-size: 1rem;
+      color: var(--nv-green-bright);
     }
 
     @media (max-width: 980px) {
@@ -594,14 +788,20 @@
       <div class="crest" aria-hidden="true">GD</div>
       <div>
         <div class="brand-title" id="brandTitle">Gesner Deslandes Lifelong Learning University</div>
-        <div class="brand-sub" id="brandSub">Year 1 Book Codex • 100 Modern AI-Era Lessons • Read 2–3× + Listen</div>
+        <div class="brand-sub" id="brandSub">
+          Software Developer: Gesner Deslandes • (509)-47385663 • deslandes78@gmail.com • NVIDIA Interactive Codex
+        </div>
       </div>
     </div>
     <div class="topbar-controls">
+      <button class="btn btn-nv" id="openDevModalBtn" type="button">⚡ NVIDIA Dev & Lab</button>
       <button class="btn btn-lang" id="langToggleBtn" type="button" title="Tap to translate between English and French">
         🌐 EN → FR
       </button>
-      <div class="overall-progress" id="overallProgress">0 / 100 Lessons Completed</div>
+      <div class="overall-progress" id="overallProgress">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span id="progressCountText">0 / 100 Lessons Completed</span>
+      </div>
       <button class="btn btn-ghost-dark" id="resetProgressBtn" type="button">Reset Progress</button>
     </div>
   </header>
@@ -661,7 +861,7 @@
           <div class="audio-panel">
             <div class="audio-row">
               <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-                <button class="btn btn-primary" id="playAudioBtn" type="button">▶ Listen to AI Professor</button>
+                <button class="btn btn-nv" id="playAudioBtn" type="button">▶ Listen to AI Professor</button>
                 <button class="btn btn-secondary" id="stopAudioBtn" type="button">■ Stop</button>
               </div>
               <div class="speed-group">
@@ -685,13 +885,29 @@
             <span id="readCountText">Reads recorded for this lesson: 0</span>
             <div style="display:flex;gap:0.45rem;flex-wrap:wrap;">
               <button class="btn btn-secondary" id="logReadBtn" type="button">+ Log a Read</button>
-              <button class="btn btn-primary" id="completePassBtn" type="button">Mark Current Pass Done</button>
+              <button class="btn btn-nv" id="completePassBtn" type="button">Mark Current Pass Done</button>
             </div>
           </div>
         </article>
 
-        <!-- Margin Page: InVideo Visual + Takeaways + Reflection -->
+        <!-- Margin Page: NVIDIA Studio + InVideo + Takeaways + Reflection + Developer Info -->
         <aside class="right-page">
+          <div class="nv-studio-card">
+            <div class="nv-studio-top">
+              <span class="nv-studio-title" id="nvStudioTitle">NVIDIA AI Professor Studio</span>
+              <span class="nv-pill">RTX / TENSOR LAB</span>
+            </div>
+            <div class="nv-mode-row" role="group" aria-label="NVIDIA Learning Mode">
+              <button class="nv-mode-btn active" data-nv-mode="skim" type="button" id="nvModeSkim">Skim</button>
+              <button class="nv-mode-btn" data-nv-mode="deep" type="button" id="nvModeDeep">Deep Read</button>
+              <button class="nv-mode-btn" data-nv-mode="quiz" type="button" id="nvModeQuiz">Recall</button>
+            </div>
+            <div class="nv-telemetry-box" id="nvTelemetryBox"></div>
+            <div class="nv-meter-track">
+              <div class="nv-meter-fill" id="nvMeterFill"></div>
+            </div>
+          </div>
+
           <div class="side-card">
             <h3 id="invideoHeading">InVideo Visual Scene</h3>
             <div class="video-box" id="invideoContainer"></div>
@@ -717,6 +933,28 @@
               <button class="btn btn-secondary" id="saveNoteBtn" type="button">Save Reflection</button>
             </div>
           </div>
+
+          <div class="side-card">
+            <h3 id="devHeading">Software Developer & Contact</h3>
+            <div class="dev-card-name">Gesner Deslandes</div>
+            <div class="dev-card-role" id="devRole">Software Developer</div>
+            <ul class="dev-info-list">
+              <li>
+                <strong id="devPhoneLabel">Contact info:</strong>
+                <a href="tel:+50947385663">(509)-47385663</a>
+              </li>
+              <li>
+                <strong id="devEmailLabel">Email:</strong>
+                <a href="mailto:deslandes78@gmail.com">deslandes78@gmail.com</a>
+              </li>
+              <li>
+                <strong id="devWebsiteLabel">Website:</strong>
+                <a href="https://deslandes1.github.io/Let-s-Play-with-Jarvis/" target="_blank" rel="noopener noreferrer">
+                  https://deslandes1.github.io/Let-s-Play-with-Jarvis/
+                </a>
+              </li>
+            </ul>
+          </div>
         </aside>
       </div>
 
@@ -725,17 +963,43 @@
         <span id="footerTip" style="font-size:0.82rem;color:var(--ink-secondary);">
           Tip: Complete Pass 1, Pass 2, and Pass 3 to master the lesson.
         </span>
-        <button class="btn btn-primary" id="nextLessonBtn" type="button">Next Page →</button>
+        <button class="btn btn-nv" id="nextLessonBtn" type="button">Next Page →</button>
       </div>
     </section>
   </main>
+
+  <!-- NVIDIA Developer & Lab Modal -->
+  <div class="modal-backdrop" id="devModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="modalTitle">⚡ NVIDIA AI Studio & Developer Profile</h2>
+        <button class="btn btn-ghost-dark" id="closeDevModalBtn" type="button">✕</button>
+      </div>
+      <p style="font-size:0.88rem;color:#d6e0ce;margin-bottom:0.9rem;" id="modalIntro">
+        Built by <strong>Gesner Deslandes</strong> (Software Developer) for multi-pass reading, AI Professor narration, and visual learning.
+      </p>
+      <div class="nv-telemetry-box" style="margin-bottom:1rem;">
+        <div><strong>Software Developer:</strong> Gesner Deslandes</div>
+        <div><strong>Contact info:</strong> <a href="tel:+50947385663" style="color:var(--nv-green-bright);">(509)-47385663</a></div>
+        <div><strong>Email:</strong> <a href="mailto:deslandes78@gmail.com" style="color:var(--nv-green-bright);">deslandes78@gmail.com</a></div>
+        <div><strong>Website:</strong> <a href="https://deslandes1.github.io/Let-s-Play-with-Jarvis/" target="_blank" rel="noopener noreferrer" style="color:var(--nv-green-bright);">https://deslandes1.github.io/Let-s-Play-with-Jarvis/</a></div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:0.5rem;">
+        <a class="btn btn-nv" href="https://deslandes1.github.io/Let-s-Play-with-Jarvis/" target="_blank" rel="noopener noreferrer">
+          Open Website ↗
+        </a>
+        <button class="btn btn-ghost-dark" id="closeDevModalBtnBottom" type="button">Close</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     const UI_STRINGS = {
       en: {
         langBtn: "🌐 EN → FR",
+        openDevModalBtn: "⚡ NVIDIA Dev & Lab",
         brandTitle: "Gesner Deslandes Lifelong Learning University",
-        brandSub: "Year 1 Book Codex • 100 Modern AI-Era Lessons • Read 2–3× + Listen",
+        brandSub: "Software Developer: Gesner Deslandes • (509)-47385663 • deslandes78@gmail.com • NVIDIA Interactive Codex",
         overallProgress: (done) => `${done} / 100 Lessons Completed`,
         resetBtn: "Reset Progress",
         resetConfirm: "Reset all reading passes, read counts, and notes for Year 1?",
@@ -764,6 +1028,24 @@
         readsRecorded: (r) => `Reads recorded for this lesson: ${r} (Aim for 2–3 reads)`,
         logReadBtn: "+ Log a Read",
         completePassBtn: "Mark Current Pass Done",
+        nvStudioTitle: "NVIDIA AI Professor Studio",
+        nvModeSkim: "Skim",
+        nvModeDeep: "Deep Read",
+        nvModeQuiz: "Recall",
+        nvTelemetry: {
+          skim: {
+            line: "Tensor Overview Mode • Scan headings, visual hook, and core thesis (Pass 1).",
+            pct: "42%"
+          },
+          deep: {
+            line: "Dual-Stream Read + Audio • Read 2–3× while AI Professor narrates each paragraph.",
+            pct: "78%"
+          },
+          quiz: {
+            line: "Active Recall Engine • Summarize without looking, then write your reflection below.",
+            pct: "100%"
+          }
+        },
         invideoHeading: "InVideo Visual Scene",
         invideoSlotReady: "InVideo Slot Ready",
         invideoHelp: "Add this lesson's InVideo embed URL in STARTER_LESSONS to display video here.",
@@ -774,14 +1056,22 @@
         savedBadge: "Saved in browser",
         notSavedBadge: "Not saved yet",
         saveNoteBtn: "Save Reflection",
+        devHeading: "Software Developer & Contact",
+        devRole: "Software Developer",
+        devPhoneLabel: "Contact info:",
+        devEmailLabel: "Email:",
+        devWebsiteLabel: "Website:",
+        modalTitle: "⚡ NVIDIA AI Studio & Developer Profile",
+        modalIntro: "Built by <strong>Gesner Deslandes</strong> (Software Developer) for multi-pass reading, AI Professor narration, and visual learning.",
         prevBtn: "← Previous Page",
         nextBtn: "Next Page →",
         footerTip: "Tip: Complete Pass 1, Pass 2, and Pass 3 to master the lesson."
       },
       fr: {
         langBtn: "🌐 FR → EN",
+        openDevModalBtn: "⚡ Studio NVIDIA & Dev",
         brandTitle: "Université d'Apprentissage Continu Gesner Deslandes",
-        brandSub: "Codex de 1re Année • 100 Leçons Modernes à l'Ère de l'IA • Lire 2–3× + Écouter",
+        brandSub: "Développeur Logiciel : Gesner Deslandes • (509)-47385663 • deslandes78@gmail.com • Codex Interactif NVIDIA",
         overallProgress: (done) => `${done} / 100 Leçons Terminées`,
         resetBtn: "Réinitialiser",
         resetConfirm: "Réinitialiser tous les passages de lecture, lectures et notes de la 1re année ?",
@@ -810,6 +1100,24 @@
         readsRecorded: (r) => `Lectures enregistrées pour cette leçon : ${r} (Visez 2–3 lectures)`,
         logReadBtn: "+ Noter une Lecture",
         completePassBtn: "Valider la Passe Active",
+        nvStudioTitle: "Studio Professeur IA NVIDIA",
+        nvModeSkim: "Aperçu",
+        nvModeDeep: "Lecture",
+        nvModeQuiz: "Rappel",
+        nvTelemetry: {
+          skim: {
+            line: "Mode Aperçu Rapide • Repérez les titres, la scène visuelle et l'idée clé (Passe 1).",
+            pct: "42%"
+          },
+          deep: {
+            line: "Double Flux Lecture + Audio • Lisez 2–3× pendant la narration du Professeur IA.",
+            pct: "78%"
+          },
+          quiz: {
+            line: "Moteur de Rappel Actif • Résumez de mémoire, puis rédigez votre réflexion ci-dessous.",
+            pct: "100%"
+          }
+        },
         invideoHeading: "Scène Visuelle InVideo",
         invideoSlotReady: "Emplacement InVideo Prêt",
         invideoHelp: "Ajoutez l'URL d'intégration InVideo de cette leçon dans STARTER_LESSONS pour afficher la vidéo.",
@@ -820,6 +1128,13 @@
         savedBadge: "Enregistré dans le navigateur",
         notSavedBadge: "Pas encore enregistré",
         saveNoteBtn: "Enregistrer la Réflexion",
+        devHeading: "Développeur Logiciel et Contact",
+        devRole: "Développeur Logiciel",
+        devPhoneLabel: "Contact :",
+        devEmailLabel: "E-mail :",
+        devWebsiteLabel: "Site web :",
+        modalTitle: "⚡ Studio IA NVIDIA et Profil Développeur",
+        modalIntro: "Développé par <strong>Gesner Deslandes</strong> (Développeur Logiciel) pour la lecture en plusieurs passes, la voix du Professeur IA et l'apprentissage visuel.",
         prevBtn: "← Page Précédente",
         nextBtn: "Page Suivante →",
         footerTip: "Astuce : Terminez la Passe 1, la Passe 2 et la Passe 3 pour maîtriser la leçon."
@@ -1146,7 +1461,7 @@
     }
 
     const LESSONS = buildAllLessons();
-    const STORAGE_KEY = "gdllu_year1_state_v2";
+    const STORAGE_KEY = "gdllu_nvidia_codex_v1";
 
     function loadState() {
       try {
@@ -1155,6 +1470,7 @@
           const parsed = JSON.parse(raw);
           return {
             lang: parsed.lang === "fr" ? "fr" : "en",
+            nvMode: ["skim", "deep", "quiz"].includes(parsed.nvMode) ? parsed.nvMode : "deep",
             currentLesson: parsed.currentLesson || 1,
             currentPass: parsed.currentPass || 1,
             speechRate: parsed.speechRate || 1.0,
@@ -1164,6 +1480,7 @@
       } catch (e) {}
       return {
         lang: "en",
+        nvMode: "deep",
         currentLesson: 1,
         currentPass: 1,
         speechRate: 1.0,
@@ -1220,6 +1537,7 @@
       const strings = t();
       document.documentElement.lang = state.lang;
       document.getElementById("langToggleBtn").textContent = strings.langBtn;
+      document.getElementById("openDevModalBtn").textContent = strings.openDevModalBtn;
       document.getElementById("brandTitle").textContent = strings.brandTitle;
       document.getElementById("brandSub").textContent = strings.brandSub;
       document.getElementById("resetProgressBtn").textContent = strings.resetBtn;
@@ -1250,12 +1568,33 @@
       document.getElementById("logReadBtn").textContent = strings.logReadBtn;
       document.getElementById("completePassBtn").textContent = strings.completePassBtn;
 
+      document.getElementById("nvStudioTitle").textContent = strings.nvStudioTitle;
+      document.getElementById("nvModeSkim").textContent = strings.nvModeSkim;
+      document.getElementById("nvModeDeep").textContent = strings.nvModeDeep;
+      document.getElementById("nvModeQuiz").textContent = strings.nvModeQuiz;
+
+      document.querySelectorAll(".nv-mode-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.nvMode === state.nvMode);
+      });
+      const modeSpec = strings.nvTelemetry[state.nvMode] || strings.nvTelemetry.deep;
+      document.getElementById("nvTelemetryBox").textContent = modeSpec.line;
+      document.getElementById("nvMeterFill").style.width = modeSpec.pct;
+
       document.getElementById("invideoHeading").textContent = strings.invideoHeading;
       document.getElementById("takeawaysHeading").textContent = strings.takeawaysHeading;
       document.getElementById("reflectionHeading").textContent = strings.reflectionHeading;
       document.getElementById("reflectionPrompt").textContent = strings.reflectionPrompt;
       document.getElementById("reflectionInput").placeholder = strings.reflectionPlaceholder;
       document.getElementById("saveNoteBtn").textContent = strings.saveNoteBtn;
+
+      document.getElementById("devHeading").textContent = strings.devHeading;
+      document.getElementById("devRole").textContent = strings.devRole;
+      document.getElementById("devPhoneLabel").textContent = strings.devPhoneLabel;
+      document.getElementById("devEmailLabel").textContent = strings.devEmailLabel;
+      document.getElementById("devWebsiteLabel").textContent = strings.devWebsiteLabel;
+
+      document.getElementById("modalTitle").textContent = strings.modalTitle;
+      document.getElementById("modalIntro").innerHTML = strings.modalIntro;
 
       document.getElementById("prevLessonBtn").textContent = strings.prevBtn;
       document.getElementById("nextLessonBtn").textContent = strings.nextBtn;
@@ -1356,11 +1695,11 @@
       } else {
         invideoEl.innerHTML = `
           <div class="video-placeholder">
-            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:#fb923c;font-weight:700;">
+            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--nv-green-bright);font-weight:700;">
               ${escapeHtml(strings.invideoSlotReady)}
             </div>
             <p>${escapeHtml(content.invideoPrompt)}</p>
-            <span style="font-size:0.75rem;color:#a8a29e;">
+            <span style="font-size:0.75rem;color:#9aa394;">
               ${escapeHtml(strings.invideoHelp)}
             </span>
           </div>
@@ -1379,7 +1718,7 @@
       document.getElementById("nextLessonBtn").disabled = lesson.number >= 100;
 
       const completedCount = LESSONS.filter((l) => isLessonComplete(l.number)).length;
-      document.getElementById("overallProgress").textContent = strings.overallProgress(completedCount);
+      document.getElementById("progressCountText").textContent = strings.overallProgress(completedCount);
     }
 
     function renderAll() {
@@ -1460,6 +1799,30 @@
     function escapeAttribute(str) {
       return escapeHtml(str).replaceAll("'", "&#39;");
     }
+
+    const devModal = document.getElementById("devModal");
+    document.getElementById("openDevModalBtn").addEventListener("click", () => {
+      devModal.classList.add("open");
+    });
+    document.getElementById("closeDevModalBtn").addEventListener("click", () => {
+      devModal.classList.remove("open");
+    });
+    document.getElementById("closeDevModalBtnBottom").addEventListener("click", () => {
+      devModal.classList.remove("open");
+    });
+    devModal.addEventListener("click", (e) => {
+      if (e.target === devModal) {
+        devModal.classList.remove("open");
+      }
+    });
+
+    document.querySelectorAll(".nv-mode-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.nvMode = btn.dataset.nvMode;
+        saveState();
+        renderStaticChrome();
+      });
+    });
 
     document.getElementById("langToggleBtn").addEventListener("click", () => {
       stopSpeech();
@@ -1545,6 +1908,7 @@
         const currentLang = state.lang;
         state = {
           lang: currentLang,
+          nvMode: "deep",
           currentLesson: 1,
           currentPass: 1,
           speechRate: 1.0,
